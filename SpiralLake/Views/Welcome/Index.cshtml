@@ -1,0 +1,55 @@
+﻿@{
+    Layout = "_WelcomeLayout.cshtml";
+}
+<div>
+    <div class="UI creamText" style="margin: auto; width: 450px;">
+        <h1>Welcome to Spiral Lake</h1>
+    </div>
+    <div class="uispacer">&nbsp;</div>
+    <div class="UI creamText" id="accesscontrols" style="width: 200px; border-radius: 0px 25px 25px 0px;">
+        <div id="accessoptions">
+            <div>
+                <a href="" id="login"><h2>Log in</h2></a>
+            </div>
+            <div style="height: 50px;">&nbsp;</div>
+            <div>
+                <a id="guest" href=""><h2>Visit as guest</h2></a>
+            </div>
+        </div>
+        <div id="logincontrols" style="display: none;">
+            <form method="post" id="navigate" action="/Welcome/Login">
+                <div id="loginFormElems">
+                    <div id="loginError"></div>
+                    <label for="UserName">User Name:</label><br />
+                    <input name="UserName" type="text" /><br /><br />
+                    <div class="RegisterControl" style="display: none;">
+                        <label for="Email">Email:</label><br />
+                        <input name="Email" class="validator" type="text" /><br /><br />
+                    </div>
+                    <label for="Password">Password:</label><br />
+                    <input name="Password" class="validator" type="password" /><br /><br />
+                    <div id="RegisterDiv" class="centerer"><a href="" id="Register" class="lnkbtn">Register</a><br /></div>
+                    <div class="RegisterControl" style="display: none;">
+                        <label for="ConfirmPassword">Confirm Password:</label><br />
+                        <input name="ConfirmPassword" class="validator" type="password" /><br /><br />
+                        <input name="TOSAgreed" class="validator" type="checkbox" /><label for="Agreed">By checking this mark, you agree to the <a target="_blank" href="https://www.websitepolicies.com/policies/view/xXtuOEwa">Terms of Service</a> and <a target="_blank" href="https://www.privacypolicytemplate.net/live.php?token=LovLgOvwlgM2xWdQeKBA6QqB7KQJ0hR8">Privacy Policy</a></label><br />
+                        <div class="centerer"><a href="" id="RegisterCancel" class="lnkbtn">Cancel Register</a><br /></div>
+                    </div>
+                    <div id="forgotPassword"><a class="creamText lnkbtn" href="/ForgotPassword">Forgot Password</a></div>
+                    <button type="button" class="blueButton creamText" id="loginProceed">Log In</button>
+                </div>
+                <div id="disclaimer" class="creamText" style="display: none;">
+                    <div class="textContainer">
+                        <h2>Disclaimers:</h2>
+                        <p>This site displays quickly moving images, which may not be appropriate for people who susceptible to seizures.  This may also temporarily distort vision, and should not be used before driving or operating heavy machinery.</p>
+                        <p>This site is intended only for recreational purposes.  We make no claim of any medical or mental health benefit from using this site.</p>
+                        <p>Hypnosis cannot immediately affect long-term behavioral changes, but requires a state of trust to work, and this may be abused.  Please treat any claim in any hypnosis prompt with a critical eye, including claims that seem reasonable even outside of trance.</p>
+                        <p>This site uses cookies to allow session data to persist between page loads, and is required for the functionality of the site.  By proceeding, you are consenting to the site's cookies being stored on and read from your machine.</p>
+                    </div>
+                    <input type="submit" name="login" class="blueButton creamText" id="btnLogin" value="Log In" />
+                </div><br />
+                <button type="button" class="blueButton creamText" id="btnCancel">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>

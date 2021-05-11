@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Spiral Lake";
+}
+
+@Html.React("MesmerList", new {
+    mesmerList = new List<SpiralLake.Data.Mesmer>(),
+    queryUrl = Url.Action("MesmerList", "api"),
+    navigateUrl = Url.Action("View", "Mesmer"),
+    mode = "mainList"
+    }
+)
+<div class="hidden" id="IndexMarker"></div>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.13.0/umd/react.development.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.0/umd/react-dom.development.js"></script>
+<script src="@Url.Content("~/js/MesmerList.jsx")"></script>
+@Html.ReactInitJavaScript()

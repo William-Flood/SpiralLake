@@ -1,0 +1,34 @@
+﻿@model System.Collections.Generic.IEnumerable<SpiralLake.Data.Mesmer>
+@{
+    ViewData["Title"] = "Submissions";
+}
+
+<h1 class="creamText">My Submissions</h1>
+
+@Html.React("MesmerList", new {
+    mesmerList = Model,
+    navigateUrl = Url.Action("Update", "Mesmer"),
+    removeUrl = Url.Action("Delete", "Mesmer"),
+    mode = "userList"
+    }
+)
+
+@*<div id="userMesmerList" class="creamText">
+    @foreach (var userMesmer in Model) {
+    <div class="mesmerItem">
+        <a class="playLink" href="/Mesmer/Update/@userMesmer.ID"><img alt="play" height="48" width="48" src="/img/PlayButton.svg"></a>
+        <a class="titleLink creamText" href="/Mesmer/Update/@userMesmer.ID"><strong class="mesmerTitle">Test Mesmer 1</strong></a>
+        <span class="mesmerViews tiny UI">&nbsp;@userMesmer.Views&nbsp;</span>
+        <span class="mesmerDescription">@userMesmer.Description</span>
+        <a href="" class="deleteMesmer" data-id="@userMesmer.ID">Remove</a>
+        <span style="display: none">
+            <a href="" class="deleteMesmer" data-id="@userMesmer.ID">Cancel</a>&nbsp;
+            <a href="" class="deleteMesmer" data-id="@userMesmer.ID">Remove</a>
+        </span>
+    </div>
+    }
+</div>*@
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.13.0/umd/react.development.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.0/umd/react-dom.development.js"></script>
+<script src="@Url.Content("~/js/MesmerList.jsx")"></script>
+@Html.ReactInitJavaScript()

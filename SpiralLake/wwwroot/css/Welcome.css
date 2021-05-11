@@ -1,0 +1,141 @@
+﻿
+body {
+    width: 100%;
+    margin: 0px;
+    background-image: url('/img/WelcomeBackground.svg');
+    background-attachment:  fixed;
+    background-size: cover;
+    background-position: right center;
+}
+
+svg {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+    left: 0px;
+}
+
+.expandable {
+    transition: height 1s;
+    overflow: hidden;
+}
+
+.collapsed {
+    height: 0%;
+}
+
+.UI {
+    background-color: rgba(16, 16, 16, .5);
+}
+
+h1 {
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 45pt;
+    font-family: "Times New Roman";
+    margin: 0px;
+}
+
+h2 {
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 20pt;
+    font-family: "Times New Roman";
+    margin: 0px;
+}
+
+h2:hover {
+    font-size: 25pt;
+}
+
+a {
+    color: inherit;
+}
+
+.uispacer {
+    height: 75px;
+}
+
+#logincontrols {
+    padding: 15px;
+}
+
+#accessoptions {
+}
+
+#accesscontrols {
+    position: relative;
+    z-index: 2;
+}
+
+input {
+    background-color: #ffddcc;
+    width: 250px;
+}
+
+label {
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.blueButton {
+    border-radius: 5px;
+    border: 1px solid #774411;
+    background-color: #111133;
+    margin-top: 10px;
+    font-size: 11pt;
+    margin-left: 10px;
+}
+
+.blueButton:hover {
+    background-color: #000022;
+}
+
+.greyedButton {
+    border-radius: 5px;
+    border: 1px solid #774411;
+    background-color: #555555;
+    color: #aa9955;
+    margin-top: 10px;
+    font-size: 11pt;
+    margin-left: 10px;
+}
+
+.lnkbtn:hover {
+    font-size: 16pt;
+}
+
+.centerer {
+    text-align: center;
+}
+
+#loginError {
+    color: #ddaa55;
+    font-size: 10pt;
+    margin-bottom: 5px;
+}
+
+.creamText {
+    color: #eeddaa;
+}
+
+#forgotPassword {
+    margin: 10px;
+}
+
+@media only screen and (max-height: 400px) {
+    .uispacer {
+        height: 25px;
+    }
+
+    h1 {
+        font-size: 30pt;
+    }
+
+    h2 {
+        font-size: 16pt;
+    }
+}

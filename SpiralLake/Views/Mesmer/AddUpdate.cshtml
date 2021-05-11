@@ -1,0 +1,28 @@
+﻿@model SpiralLake.Models.MesmerAndText
+@{
+    ViewData["Title"] = "Spiral Lake";
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () { $("#notification").slideUp() }, 1000);
+        });
+    </script>
+}
+
+<form method="post">
+    @Html.HiddenFor(m=>m.Mesmer.ID)
+    <div class="UI creamText centerer" style="margin: auto; width: 450px;" id="notification">@Model.Notification</div>
+    <div class="centerer">
+        <label class="creamText" for="Mesmer.Name">Name:</label><br /><br />
+        @Html.TextBoxFor(m => m.Mesmer.Name, "", new { Class = "wide" })<br /><br />
+        <label class="creamText" for="Mesmer.Description">Description:</label><br /><br />
+        @Html.TextAreaFor(m => m.Mesmer.Description, new { Class = "wide" })<br /><br />
+        <label class="creamText" for="MesmerText">Text:</label><br /><br />
+        @Html.TextAreaFor(m => m.MesmerText, new { Class = "wide" })<br /><br />
+        <label class="creamText" for="Tags">Tags (separated by spaces):</label><br /><br />
+        @Html.TextBoxFor(m => m.Tags, new { Class = "wide" })<br /><br />
+    </div>
+    <input type="submit"  class="blueButton creamText" style="margin-left: 15%;" value="@Model.ButtonLabel" />
+</form>

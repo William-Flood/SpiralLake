@@ -1,0 +1,77 @@
+﻿@model SpiralLake.Models.MesmerAndText
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@section Scripts {
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/gl-matrix.js"></script>
+    <script src="/js/site.js"></script>
+    <script src="/js/Spiral.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btnReport").click(function () {
+                if ($("#reportForm").hasClass("collapsed")) {
+                    $("#reportForm").slideDown();
+                    $("#reportForm").removeClass("collapsed");
+                }
+                else {
+                    $("#reportForm").slideUp();
+                    $("#reportForm").addClass("collapsed");
+                }
+            });
+            setTimeout(function () { $("#notification").slideUp() }, 1000);
+        });
+    </script>
+}
+
+
+<div class="UI creamText centerer" style="margin: auto; width: 450px;" id="notification">@Model.Notification</div>
+<div class="canvasContainer" style="height: 0px; width: 800px;">
+    <div id="sizeControl"></div>
+    <canvas id="spiraltarget1" style="width: 800px; height: 200px">
+    </canvas>
+    <div class="textblock" style="width: 0px; display: none;">
+    </div>
+    <div class="textCenterer"></div>
+    <canvas id="spiraltarget2" style="width: 800px; height: 200px">
+    </canvas>
+</div>
+<div id="controls" class="centerer">
+    <p class="creamText tiny"><span class="UI">Note: Rapidly moving images</span></p><br />
+    <button onclick="StartPage();" type="button" class="blueButton creamText">Start</button>&nbsp;<button id="btnFullScreen" type="button" class="blueButton creamText">Start Fullscreen</button><br />
+    <div style="display: none;">
+        <!-- These are legacy controls, initially created for testing purposes.  You can change these settings to alter the animation, if desired -->
+        xRight:<input type="text" id="xOne" value="0.7" /><br />
+        xRightBottom:<input type="text" id="aOneOne" value="-0.15" /><br />
+        xRightTop:<input type="text" id="aOneTwo" value="-0.05" /><br />
+        yRightBottom:<input type="text" id="bOneOne" value="0.15" /><br />
+        yRightTop:<input type="text" id="bOneTwo" value="0.2" /><br />
+        xLeft:<input type="text" id="xTwo" value="-0.6" /><br />
+        xLeftBottom:<input type="text" id="aTwoOne" value="0.1" /><br />
+        xLeftTop:<input type="text" id="aTwoTwo" value=".2" /><br />
+        yLeftBottom:<input type="text" id="bTwoOne" value="-0.25" /><br />
+        yLeftTop:<input type="text" id="bTwoTwo" value="-0.1" /><br />
+        Number of Curves:<input type="text" id="num_curves" value="10" /><br />
+        Spiral Speed:<input type="text" id="seconds_per_rotation" value="20" /><br />
+        Spiral Separation:<input type="text" id="horizontal_displacement" value=".2" /><br />
+        Number of Rings:<input type="text" id="num_rings" value="50" /><br />
+        Ring Speed:<input type="text" id="ring_shrink_seconds" value="0.2" /><br />
+        Ring Style:<label for="ring_type">Circle</label><input checked id="circle_ring_type" type="radio" name="ring_type" value="circle" /><label for="ring_type">Oval</label><input id="oval_ring_type" type="radio" name="ring_type" value="oval" /><br />
+    </div>
+    <br />
+    <p class="creamText"><span class="">Mesmer Text:</span></p><br />
+    @Html.TextAreaFor(m => m.MesmerText, new { ID = "txtPrompt", Style = "margin-top: 5px; width: 600px;" })
+    <br />
+    <br />
+</div>
+@*<div class="5pcRightMargin">
+    <button type="button" id="btnReport" class="redButton creamText">Report</button><br />
+    <form id="reportForm" class="UI threeBorder pushedLeft inlineBlock collapsed" style="display: none;" method="post" action="/Mesmer/Report">
+        <label for="reason" class="creamText">Reason:</label>&nbsp;<input type="text" id="reason" /><br /><br />
+        <input type="submit" class="redButton creamText" value="Report" />
+        <input type="hidden" id="mesmerID" value="@Model.Mesmer.ID" />
+    </form>
+</div>*@

@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SpiralLake</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+    <script src="~/js/site.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow">
+            @if (null != User.Claims.FirstOrDefault(c => c.Type.Equals("Authenticated"))) {
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SpiralLake</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <div id="searchBar">
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0     0 640 640" width="24" height="24"><defs><path d="M275.53 34.83L284.72 35.76L293.8 37.05L302.76 38.68L311.59 40.66L320.29 42.97L328.86   45.62L337.27 48.58L345.52 51.86L353.62 55.45L361.54 59.34L369.29 63.52L376.85 67.98L384.22 72.72L391.4 77.74L398.36 83.01L405.11 88.55L411.64     94.33L417.94 100.35L424.01 106.61L429.83 113.09L435.4 119.8L440.71 126.72L445.76 133.84L450.54 141.16L455.03 148.67L459.24 156.36L463.16    164.23L466.77 172.27L470.07 180.47L473.06 188.82L475.72 197.33L478.05 205.97L480.04 214.74L481.69 223.64L482.98 232.65L483.92 241.78L484.48    251.01L484.67 260.34L484.48 269.66L483.92 278.89L482.98 288.02L481.69 297.04L480.04 305.94L478.05 314.71L475.72 323.35L473.06 331.85L470.07    340.21L466.77 348.41L463.16 356.44L459.24 364.31L455.03 372.01L450.54 379.52L445.93 386.59L589.82 529.48L527.86 591.02L383.97 448.12L376.85    452.69L369.29 457.16L361.54 461.34L353.62 465.22L345.52 468.81L337.27 472.09L328.86 475.06L320.29 477.7L311.59 480.02L302.76 482L293.8     483.63L284.72 484.92L275.53 485.84L266.24 486.4L256.84 486.59L247.45 486.4L238.16 485.84L228.97 484.92L219.89 483.63L210.93 482L202.1   480.02L193.39 477.7L184.83 475.06L176.42 472.09L168.16 468.81L160.07 465.22L152.15 461.34L144.4 457.16L136.84 452.69L129.47 447.95L122.29     442.94L115.33 437.66L108.58 432.13L102.05 426.35L95.75 420.32L89.68 414.07L83.86 407.58L78.29 400.88L72.98 393.96L67.93 386.84L63.15    379.52L58.66 372.01L54.45 364.31L50.53 356.44L46.92 348.41L43.62 340.21L40.63 331.85L37.97 323.35L35.64 314.71L33.65 305.94L32 297.04L30.71    288.02L29.77 278.89L29.21 269.66L29.02 260.34L29.21 251.01L29.77 241.78L30.71 232.65L32 223.64L33.65 214.74L35.64 205.97L37.97 197.33L40.63    188.82L43.62 180.47L46.92 172.27L50.53 164.23L54.45 156.36L58.66 148.67L63.15 141.16L67.93 133.84L72.98 126.72L78.29 119.8L83.86 113.09L89.68  106.61L95.75 100.35L102.05 94.33L108.58 88.55L115.33 83.01L122.29 77.74L129.47 72.72L136.84 67.98L144.4 63.52L152.15 59.34L160.07 55.45L168.16    51.86L176.42 48.58L184.83 45.62L193.39 42.97L202.1 40.66L210.93 38.68L219.89 37.05L228.97 35.76L238.16 34.83L247.45 34.27L256.84 34.08L266.24  34.27L275.53 34.83ZM245.32 121.2L239.64 121.77L234.04 122.56L228.51 123.57L223.06 124.79L217.69 126.22L212.41 127.85L207.22 129.68L202.13   131.71L197.13 133.92L192.24 136.32L187.46 138.9L182.8 141.65L178.25 144.58L173.82 147.67L169.53 150.93L165.36 154.34L161.33 157.91L157.44     161.62L153.7 165.48L150.11 169.49L146.67 173.62L143.39 177.89L140.28 182.28L137.33 186.8L134.56 191.44L131.96 196.18L129.55 201.04L127.32   206L125.28 211.06L123.44 216.21L121.8 221.46L120.36 226.79L119.13 232.2L118.11 237.69L117.31 243.26L116.74 248.89L116.39 254.58L116.27    260.34L116.39 266.09L116.74 271.79L117.31 277.42L118.11 282.98L119.13 288.47L120.36 293.89L121.8 299.22L123.44 304.46L125.28 309.62L127.32     314.68L129.55 319.64L131.96 324.49L134.56 329.24L137.33 333.88L140.28 338.39L143.39 342.79L146.67 347.05L150.11 351.19L153.7 355.19L157.44  359.05L161.33 362.77L165.36 366.34L169.53 369.75L173.82 373.01L178.25 376.1L182.8 379.03L187.46 381.78L192.24 384.36L197.13 386.76L202.13    388.97L207.22 390.99L212.41 392.82L217.69 394.46L223.06 395.88L228.51 397.11L234.04 398.11L239.64 398.91L245.32 399.48L251.05 399.83L256.84    399.94L262.64 399.83L268.37 399.48L274.04 398.91L279.65 398.11L285.18 397.11L290.63 395.88L295.99 394.46L301.28 392.82L306.47 390.99L311.56    388.97L316.56 386.76L321.45 384.36L326.23 381.78L330.89 379.03L335.44 376.1L339.87 373.01L344.16 369.75L348.33 366.34L352.36 362.77L356.25     359.05L359.99 355.19L363.58 351.19L367.02 347.05L370.3 342.79L373.41 338.39L376.36 333.88L379.13 329.24L381.73 324.49L384.14 319.64L386.37  314.68L388.41 309.62L390.25 304.46L391.89 299.22L393.33 293.89L394.56 288.47L395.58 282.98L396.38 277.42L396.95 271.79L397.3 266.09L397.42   260.34L397.3 254.58L396.95 248.89L396.38 243.26L395.58 237.69L394.56 232.2L393.33 226.79L391.89 221.46L390.25 216.21L388.41 211.06L386.37     206L384.14 201.04L381.73 196.18L379.13 191.44L376.36 186.8L373.41 182.28L370.3 177.89L367.02 173.62L363.58 169.49L359.99 165.48L356.25  161.62L352.36 157.91L348.33 154.34L344.16 150.93L339.87 147.67L335.44 144.58L330.89 141.65L326.23 138.9L321.45 136.32L316.56 133.92L311.56   131.71L306.47 129.68L301.28 127.85L295.99 126.22L290.63 124.79L285.18 123.57L279.65 122.56L274.04 121.77L268.37 121.2L262.64 120.85L256.84    120.73L251.05 120.85L245.32 121.2Z" id="b1iJq9dVDt"></path><path d="M296.54 253.89C296.54 289.39 267.38 318.2 231.45 318.2C195.53 318.2 166.36  289.39 166.36 253.89C166.36 218.39 195.53 189.57 231.45 189.57C267.38 189.57 296.54 218.39 296.54 253.89Z" id="aNXonZe82"></path><radialGradient id="gradientdw7RoZ60" gradientUnits="userSpaceOnUse" cx="231.45" cy="253.89" dx="234.31" dy="318.2" r="64.38"><stop style="stop-color: #e9e9e9;stop-opacity: 0.5" offset="0%"></stop><stop style="stop-color: #e9e9e9;stop-opacity: 0" offset="100%"></stop></radialGradient></defs><g><g><g><use xlink:href="#b1iJq9dVDt" opacity="1" fill="#7b95ed" fill-opacity="1"></use></g><g><use xlink:href="#aNXonZe82" opacity="1" fill="url(#gradientdw7RoZ60)"></use></g></g></g></svg>
+                                    <input type="text" id="txtSearch" name="txtSearch" value="@ViewData["Search"]" />
+                                </div>
+                            </li>
+                            <li>
+                                @if (!"Guest".Equals(User.Claims.FirstOrDefault(c => c.Type.Equals("Authenticated")).Value)) {<a href="/Mesmer/Add" id="addButton"><img alt="Add" height="32" width="32" src="~/img/plusSign.svg" /></a>}
+                            </li>
+                            <li id="FAQElem">
+                                <a href="/Home/FAQ">
+                                    <img alt="FAQ" src="/img/QuestionMark.svg" />
+                                </a>
+                            </li>
+                            <li id="accountElem" style="color: #ffffff; position: relative;">
+                                @if (!"Guest".Equals(User.Claims.FirstOrDefault(c => c.Type.Equals("Authenticated")).Value)) {
+                                    <img id="accountIcon" alt="account" src="/img/Account Icon.svg" />
+                                    <div class="threeBorder UI creamText nowrap" id="accountControls" style="display: none; position: absolute;">
+                                        <a class="" href="/Mesmer/Submissions">My Mesmers</a><br />
+                                        <a class="" href="/Account/">Account</a><br />
+                                        <a class="" href="/Account/Logout">Log Out</a>
+                                    </div>
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            }
+        </nav>
+    </header>
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - SpiralLake - <a href="https://www.privacypolicytemplate.net/live.php?token=LovLgOvwlgM2xWdQeKBA6QqB7KQJ0hR8">Privacy</a>
+        </div>
+    </footer>
+</body>
+</html>
