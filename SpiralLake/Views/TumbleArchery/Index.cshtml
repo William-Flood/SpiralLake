@@ -1,0 +1,144 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tumble Archery</title>
+    <script src="~/js/TumbleArchery/PlayerController.js"></script>
+    <script src="~/js/TumbleArchery/PlatformController.js"></script>
+    <script src="~/js/TumbleArchery/PlatformGridController.js"></script>
+    <script src="~/js/TumbleArchery/TumbleArchery.js"></script>
+    <style>
+        #optionsOverlay {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(40, 40, 40, .8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #options {
+            background-color: #FFFFFF;
+            color: #000000;
+            width: 80%;
+        }
+
+        .optionCell {
+            white-space: nowrap;
+        }
+
+        #startWrapper {
+            margin-top: 20px;
+            padding-left: 10px;
+        }
+
+        #board {
+            display: table;
+            position: relative;
+            z-index: -1;
+        }
+
+        .boardRow {
+            display: table-row;
+        }
+
+        .platformCell {
+            display: table-cell;
+            width: 150px;
+        }
+
+        .platformClearance {
+            height: 150px;
+            position: relative;
+        }
+
+        .turret {
+            margin: auto;
+            position: relative;
+            top: 60px;
+            background-image: url("/img/TumbleArchery/IdleTurret.svg");
+            background-size: 100%;
+            height: 40px;
+            width: 40px;
+        }
+
+        .platformCell.armed .turret {
+            background-image: url("/img/TumbleArchery/ArmedTurret.svg");
+        }
+
+        .platform {
+            height: 5px;
+        }
+
+        .platformCell.active .platform {
+            background-color: #000000;
+        }
+
+        .platformCell.decaying .platform {
+            background-color: #999900;
+        }
+
+        #optionsOverlay.hidden, .hidden {
+            display: none;
+        }
+
+        #Jeremy {
+            background-image: url("/img/TumbleArchery/JeremyJamSpriteSheet.png");
+            height: 125px;
+            width: 175px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body onload="ReadValues();">
+    <div id="optionsOverlay" style="">
+        <div id="options">
+            <div class="hidden" id="GameOverScreen">
+                <h2>Game Over</h2>
+                <h3>Score: <span id="score"></span></h3>
+            </div>
+            <div>
+                <span class="optionCell">
+                    <label>Platform Rows:</label>&nbsp;<input data-type="int" id="platform_rows" value="3" type="text">
+                </span>
+                <span class="optionCell">
+                    <label>Platform Columns:</label>&nbsp;<input data-type="int" id="platform_columns" value="8" type="text">
+                </span>
+                <span class="optionCell">
+                    <label>Platform Decay Speed:</label>&nbsp;<input data-type="float" id="platform_decay_speed" value="0.0001" type="text">
+                </span>
+                <span class="optionCell">
+                    <label>Platform Deploy Speed:</label>&nbsp;<input data-type="float" id="platform_deploy_speed" value="0.00005" type="text">
+                </span>
+                <span class="optionCell">
+                    <label>Platform Deployment Line Length:</label>&nbsp;<input data-type="int" id="platform_deployment_line_length" value="2" type="text">
+                </span>
+                <span class="optionCell">
+                    <label>Starting Platform Deployments:</label>&nbsp;<input data-type="int" id="platform_starting_deployments" value="4" type="text">
+                </span>
+                <span class="optionCell">
+                    <label>Turret Deploy Speed:</label>&nbsp;<input data-type="float" id="turret_deploy_speed" value="0.00001" type="text">
+                </span>
+                <span class="optionCell">
+                    <label>Bolt Speed:</label>&nbsp;<input data-type="int" id="bolt_speed" value="5" type="text">
+                </span>
+            </div>
+            <div id="startWrapper">
+                <button onclick="StartBoard();" type="button">Start</button>
+            </div>
+        </div>
+    </div>
+    <div id="board">
+
+    </div>
+</body>
+</html>
