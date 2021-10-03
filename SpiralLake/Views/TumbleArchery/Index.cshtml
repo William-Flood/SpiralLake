@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <title>Tumble Archery</title>
     <script src="~/js/TumbleArchery/PlayerController.js"></script>
+    <script src="~/js/TumbleArchery/Bolt.js"></script>
     <script src="~/js/TumbleArchery/PlatformController.js"></script>
     <script src="~/js/TumbleArchery/PlatformGridController.js"></script>
     <script src="~/js/TumbleArchery/TumbleArchery.js"></script>
@@ -97,6 +98,14 @@
             width: 175px;
             position: absolute;
         }
+
+        #BoltData {
+            display: none;
+        }
+
+        .bolt {
+            position: absolute;
+        }
     </style>
 </head>
 <body onload="ReadValues();">
@@ -122,23 +131,50 @@
                 <span class="optionCell">
                     <label>Platform Deployment Line Length:</label>&nbsp;<input data-type="int" id="platform_deployment_line_length" value="2" type="text">
                 </span>
-                <span class="optionCell">
+                <span class="optionCell hidden">
                     <label>Starting Platform Deployments:</label>&nbsp;<input data-type="int" id="platform_starting_deployments" value="4" type="text">
                 </span>
                 <span class="optionCell">
-                    <label>Turret Deploy Speed:</label>&nbsp;<input data-type="float" id="turret_deploy_speed" value="0.00001" type="text">
+                    <label>Turret Deploy Speed:</label>&nbsp;<input data-type="float" id="turret_deploy_speed" value="0.00002" type="text">
                 </span>
                 <span class="optionCell">
-                    <label>Bolt Speed:</label>&nbsp;<input data-type="int" id="bolt_speed" value="5" type="text">
+                    <label>Turret Fire Speed:</label>&nbsp;<input data-type="float" id="turret_fire_speed" value="0.0001" type="text">
+                </span>
+                <span class="optionCell">
+                    <label>Music:</label>&nbsp;<input data-type="checkbox" id="music_on" checked="checked" type="checkbox">
+                </span>
+                <span class="optionCell">
+                    <label>Bolt Speed:</label>&nbsp;<input data-type="float" id="bolt_speed" value=".3" type="text">
                 </span>
             </div>
             <div id="startWrapper">
                 <button onclick="StartBoard();" type="button">Start</button>
             </div>
+            <div>
+                <h3>Controls</h3>
+                <p>A -&gt; Left | D -&gt; Right</p>
+                <p>W -&gt; Jump | Space -&gt; Shoot</p>
+            </div>
         </div>
     </div>
     <div id="board">
 
+    </div>
+    <audio id="theme" loop="loop" src="~/msc/TumbleArcheryTheme.mp3"></audio>
+    <div id="BoltData" data="Bolt.svg" type="image/svg+xml">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="0 0 20 20" width="20pt" height="20pt">
+            <defs><clipPath id="_clipPath_5zDPdRds9bl2dXVFnltHe5GYtZ8QSYBF"><rect width="20" height="20" /></clipPath></defs>
+            <g class="rotator" clip-path="url(#_clipPath_5zDPdRds9bl2dXVFnltHe5GYtZ8QSYBF)">
+                <path d=" M 1.438 9.375 C 6.487 6.79 12.114 7.789 17.438 8.875" fill="none" vector-effect="non-scaling-stroke" stroke-width="1" stroke="rgb(187,40,133)" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="3" />
+                <path d=" M 1.563 9.625 C 6.415 10.808 11.506 9.78 16.375 8.938" fill="none" vector-effect="non-scaling-stroke" stroke-width="1" stroke="rgb(187,40,133)" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="3" />
+                <path d=" M 2.938 9.188 C 6.59 8.273 10.333 8.252 14.063 8.563" fill="none" vector-effect="non-scaling-stroke" stroke-width="1" stroke="rgb(219,153,181)" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="3" />
+                <path d=" M 3.25 9.375 C 6.566 10.226 9.719 9.712 12.938 8.875" fill="none" vector-effect="non-scaling-stroke" stroke-width="1" stroke="rgb(219,153,181)" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="3" />
+                <path d=" M 4.938 9.25 C 6.936 9.111 8.938 8.979 10.938 8.813" fill="none" vector-effect="non-scaling-stroke" stroke-width="1" stroke="rgb(234,223,139)" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="3" />
+                <line x1="13.938" y1="6.625" x2="15.938" y2="6.75" vector-effect="non-scaling-stroke" stroke-width="1" stroke="rgb(234,223,139)" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="3" />
+                <line x1="15.875" y1="10.375" x2="17.938" y2="10.188" vector-effect="non-scaling-stroke" stroke-width="1" stroke="rgb(234,223,139)" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="3" />
+                <path d=" M 18.188 7.5 C 18.104 7.5 19.364 7.51 19.438 7.5" fill="none" vector-effect="non-scaling-stroke" stroke-width="1" stroke="rgb(234,223,139)" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="3" />
+            </g>
+        </svg>
     </div>
 </body>
 </html>

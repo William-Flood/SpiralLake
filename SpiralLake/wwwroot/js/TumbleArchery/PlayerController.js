@@ -22,6 +22,7 @@ class PlayerController {
 		this.bowPull = this.makeBowPull.bind(this);
 		this.bowFire = this.makeBowFire.bind(this);
 		this.setFireMessage = this.makeSetBowFireMessage.bind(this);
+		this.setMaxX = this.makeSetMaxX.bind(this);
 		this.speed = .5;
 		this.BodyHitBoxLeft = 100;
 		this.BodyHitBoxWidth = 30;
@@ -36,6 +37,7 @@ class PlayerController {
 		this.currentCells = [];
 		this.bowReady = true;
 		this.bowDrawn = false;
+		this.lastTick = performance.now();
 	}
 	makeWalk(direction) {
 		if(!this.walking && !this.bowDrawn) {
@@ -45,7 +47,6 @@ class PlayerController {
 			this.walkState = 0;
 			this.elem.style.backgroundPosition = "0px 0px";
 			this.animTimer = setTimeout(this.advanceWalkState, 150);
-			this.lastTick = performance.now();
 		}
 	}
 	makeStartFire() {
@@ -140,14 +141,21 @@ class PlayerController {
 			}
 			this.place(this.x + deltaX, pendingNewY);
 		} else {
+			var inActiveCell = (0 == this.currentCells.length);
 			for(var cellID = 0; cellID < this.currentCells.length; cellID++) {
-				if(!this.currentCells[cellID].active){
-					this.onGround = false;
-					this.jumping = true;
+				if(this.currentCells[cellID].active) {
+					inActiveCell = true;
 					break;
 				}
 			}
-			
+			if(!inActiveCell){
+				this.onGround = false;
+				this.jumping = true;
+				this.bowReady = true;
+				this.bowDrawn = false;
+				clearTimeout(this.animTimer);
+				this.elem.style.backgroundPosition = "-175px 125px";
+			}
 		}
 		this.lastTick = currentTick;
 		var boundCheck = this.getBodyBox();
@@ -156,6 +164,10 @@ class PlayerController {
 		}
 		if(boundCheck[2] < 0) {
 			this.place(this.x, this.y - boundCheck[2]);
+		}
+		if(boundCheck[1] > this.maxX) {
+			this.place(this.x - (boundCheck[1] - this.maxX), this.y);
+			console.log("maxX reached!");
 		}
 	}
 	makeJump() {
@@ -212,5 +224,8 @@ class PlayerController {
 	}
 	makeSetBowFireMessage(messageFn) {
 		this.bowFireMessage = messageFn;
+	}
+	makeSetMaxX(maxX) {
+		this.maxX = maxX;
 	}
 }

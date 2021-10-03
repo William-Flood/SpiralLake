@@ -4,23 +4,22 @@ class Platform {
 		this.elem = elem;
 		this.row = row;
 		this.column = column;
-		this.platformHeight = elem.getElementsByClassName("platform")[0].clientHeight;
 		this.active = true;
 		this.armed = false;
 		this.testBlockBottom = this.makeTestBlockBottom.bind(this);
 		this.testBlockTop = this.makeTestBlockTop.bind(this);
-		this.getPlatformTop = this.makeGetPlatformTop.bind(this);
 		this.getPlatformBottom = this.makeGetPlatformBottom.bind(this);
-		this.getHeight = this.makeGetHeight.bind(this);
-		this.getPlatformHeight = this.makeGetPlatformHeight.bind(this);
+		this.getPlatformTop = this.makeGetPlatformTop.bind(this);
+		this.setDims = this.makeSetDims.bind(this);
 		this.deactivate = this.makeDeactivate.bind(this);
 		this.startDeactivate = this.makeStartDeactivate.bind(this);
 		this.activate = this.makeActivate.bind(this);
 		this.arm = this.makeArm.bind(this);
 		this.disarm = this.makeDisarm.bind(this);
+		this.fire = this.makeFire.bind(this);
 	}
 	makeTestBlockBottom(testY) {
-		var platformTop = this.getPlatformTop();
+		var platformTop = this.getPlatformBottom() - this.platformHeight;
 		if(this.active) {
 			if(testY > platformTop) {
 				return true;
@@ -33,8 +32,8 @@ class Platform {
 		}
 	}
 	makeTestBlockTop(testYT, testYB) {
-		var platformTop = this.getPlatformBottom();
-		var platformBottom = platformTop + this.getPlatformHeight();
+		var platformBottom = this.getPlatformBottom();
+		var platformTop = platformBottom - this.platformHeight;
 		if(this.active) {
 			if(testYT < platformBottom && testYB > platformTop) {
 				return true;
@@ -46,20 +45,16 @@ class Platform {
 			return false;
 		}
 	}
-	makeGetPlatformTop() {
-		var height = this.getHeight();
-		var platformHeight = this.getPlatformHeight();
-		return (1 + this.row) * height - platformHeight;
-	}
-	makeGetHeight() {
-		return this.elem.clientHeight;
-	}
-	makeGetPlatformHeight() {
-		return this.elem.getElementsByClassName("platform")[0].clientHeight;
+	makeSetDims(height, width, platformHeight) {
+		this.height = height;
+		this.width = width;
+		this.platformHeight = platformHeight;
 	}
 	makeGetPlatformBottom() {
-		var height = this.getHeight();
-		return (1 + this.row) * height;
+		return (1 + this.row) * this.height;
+	}
+	makeGetPlatformTop() {
+		return (1 + this.row) * this.height - this.platformHeight;
 	}
 	makeStartDeactivate() {
 		this.elem.classList.remove("active");
@@ -81,5 +76,26 @@ class Platform {
 	makeDisarm() {
 		this.armed = false;
 		this.elem.classList.remove("armed");
+	}
+	makeFire(playerCoords) {
+		var boltOrigX = this.width * (this.column + .5)
+		var boltOrigY = this.height * this.row + parseInt(this.elem.getElementsByClassName("turret")[0].offsetTop);
+		var xOffset = ((playerCoords[0] + playerCoords[1]) / 2 - boltOrigX);
+		var yOffset = ((playerCoords[3] + playerCoords[2]) / 2 - boltOrigY);
+		var angle;
+		if(0 == xOffset) {
+			if(0 > yOffset) {
+				angle = 90;
+			} else {
+				angle = -90;
+			}
+		} else {
+			var arcTan = yOffset / xOffset;
+			angle = Math.atan(arcTan) * 180 / Math.PI;
+			if (0 > xOffset) {
+				angle = angle + 180;
+			}
+		}
+		return new Bolt([boltOrigX, boltOrigY], angle);
 	}
 }

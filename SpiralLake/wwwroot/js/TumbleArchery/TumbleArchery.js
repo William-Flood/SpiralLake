@@ -6,15 +6,16 @@ var platformArray = new PlatformGridController();
 var Jeremy = new PlayerController();
 Jeremy.setFireMessage(platformArray.receiveBowFire);
 
+
 function HandlePress(e) {
 	if(inGame) {
-		if(39 == e.keyCode) {
+		if(39 == e.keyCode || 68 == e.keyCode) {
 			Jeremy.walk(1);
 		}
-		else if(37 == e.keyCode) {
+		else if(37 == e.keyCode || 65 == e.keyCode) {
 			Jeremy.walk(-1);
 		}
-		else if(38 == e.keyCode) {
+		else if(38 == e.keyCode || 87 == e.keyCode) {
 			e.preventDefault();
 			Jeremy.jump();
 		}
@@ -30,13 +31,13 @@ function HandlePress(e) {
 
 function HandleUnpress(e) {
 	if(inGame) {
-		if(39 == e.keyCode) {
+		if(39 == e.keyCode || 68 == e.keyCode) {
 			Jeremy.stop();
 		}
-		else if(37 == e.keyCode) {
+		else if(37 == e.keyCode || 65 == e.keyCode) {
 			Jeremy.stop();
 		}
-		else if(38 == e.keyCode) {
+		else if(38 == e.keyCode || 87 == e.keyCode) {
 			e.preventDefault();
 			Jeremy.stopFloating();
 		}
@@ -67,13 +68,20 @@ function ReadValues() {
 				gameOptions[cellInputElem.id] = cellValue;
 			}
 		}
+		else if("checkbox" == cellInputElem.dataset.type) {
+			if(cellInputElem.checked) {
+				gameOptions[cellInputElem.id] = true;
+			} else {
+				gameOptions[cellInputElem.id] = false;
+			}
+		}
 	}
 }
 
 function mainLoop() {
 	Jeremy.updateDisplay();
 	var JeremyBodyCoords = Jeremy.getBodyBox();
-	platformArray.selectEnteredCells(JeremyBodyCoords);
+	platformArray.setPlayerCoords(JeremyBodyCoords);
 	Jeremy.setCurrentCells(platformArray.prevEntered);
 	platformArray.frameUpdate();
 	if(inGame) {
@@ -121,15 +129,25 @@ function StartBoard() {
 		document.getElementsByClassName("platform")[0].clientWidth,
 		document.getElementsByClassName("platform")[0].clientHeight
 	);
+	Jeremy = new PlayerController();
 	var JeremyElem = document.createElement("div");
 	JeremyElem.id = "Jeremy";
+	Jeremy.setMaxX(document.getElementById("board").clientWidth - 1);
 	boardElement.appendChild(JeremyElem);
+	platformArray.setBoardDims(
+		boardElement.clientWidth,
+		boardElement.clientHeight
+	);
 	JeremyElem.style.backgroundPosition = "0px 125px";
 	Jeremy.setElem(JeremyElem);
 	Jeremy.place(0, startHeight);
 	document.getElementById("optionsOverlay").classList.add("hidden");
 	inGame = true;
 	platformArray.lastTick = performance.now();
-	Jeremy.lastTick = performance.now();
+	document.getElementById("theme").currentTime = 0;
+	if(gameOptions["music_on"]) {
+		document.getElementById("theme").play();
+	}
+	Jeremy.setFireMessage(platformArray.receiveBowFire);
 	requestAnimationFrame(mainLoop);
 }
