@@ -116,7 +116,7 @@ namespace SpiralLake.Controllers
                 }
 
             }
-            return View("/Views/Welcome/Index");
+            return View("Views/Welcome/Index.cshtml");
         }
 
         public async Task<IActionResult> Confirmed(string userId, string code) {

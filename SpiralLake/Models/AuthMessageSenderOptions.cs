@@ -9,5 +9,6 @@ namespace SpiralLake.Models
     {
         public string SendGridUser { get; set; }
         public string SendGridKey { get; set; }
+        public string MailGunKey { get; set; }
     }
 }
