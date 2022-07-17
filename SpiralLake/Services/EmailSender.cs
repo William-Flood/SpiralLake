@@ -48,7 +48,7 @@ namespace SpiralLake.Services
             request.AddParameter("from", "Spiral Lake Account Manager <account@spirallake.com>");
             request.AddParameter("to", email);
             request.AddParameter("subject", subject);
-            request.AddParameter("text", htmlMessage);
+            request.AddParameter("html", htmlMessage);
             request.Method = Method.POST;
             var results = client.Execute(request);
             return;
